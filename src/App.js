@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import './nprogress.css'
 import { extractLocations, getEvents } from './api'
 
 // Component
