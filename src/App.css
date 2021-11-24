@@ -1,3 +1,6 @@
+/* ===
+Global styling 
+=== */
 @import url(https://fonts.googleapis.com/css?family=Roboto:500);
 .App {
   text-align: center;
@@ -13,6 +16,9 @@ ul {
   list-style: none;
 }
 
+/* ===
+CitySearch 
+=== */
 p {
   margin: 5px 0;
 }
@@ -76,8 +82,6 @@ input[type="number"] {
   background-color: #bcdcdb;
 }
 
-
-
 /* ===
 Event 
 === */
@@ -93,10 +97,10 @@ Event
   position: relative;
 }
 
-.details-btn {
+.toggle-btn {
   position: absolute;
-  right: 5px;
-  bottom: 5px;
+  right: 10px;
+  bottom: 10px;
   padding: 5px 8px;
   border-radius: 4px;
   outline: none;
