@@ -52,6 +52,7 @@ input[type="number"] {
   flex-basis: 300px;
   max-width: 300px;
   margin: auto;
+  margin-bottom: 20px;
   position: relative;
 }
 
