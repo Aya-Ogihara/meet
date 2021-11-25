@@ -18,17 +18,16 @@ export class Event extends Component {
       <div className='event'>
         <h2 className='event-summary'>{event.summary}</h2>
         <p className='event-location'>Location: {event.location}</p>
-        <p className='event-date'>Date: {event.start.dateTime}</p>
-        <p className='event-time-zone'>Time Zone: {event.start.timeZone}</p>
+        <p className='event-date'>Date: {event.start.dateTime} ({event.start.timeZone} Time)</p>
         <button className='toggle-btn' onClick={() => this.handleClick()} >{collapsed? 'More details' : 'Hide details'}</button>
         {collapsed ? (
         <div className='event-detail--hide'></div>
         ) : (
           <div className='event-detail--show'>
-            <h3>Event description</h3>
+            <h3 className='event-description-title'>Event description</h3>
             <p className='event-description'>{event.description}</p>
-            <h4>Organizer</h4>
-            <p className='event-organizer'>{event.organizer.email}</p>
+            <h4 className='event-organizer'>Organizer</h4>
+            <p >{event.organizer.email}</p>
           </div>
         )}
           
