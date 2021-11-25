@@ -89,7 +89,3 @@ describe('<App /> and <CitySearch /> integration', () => {
   });
 });
 
-
-describe('<App /> and <NumberOfEvents /> integration', () => {
- 
-})

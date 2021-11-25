@@ -28,9 +28,9 @@ export class CitySearch extends Component {
 
   render() {
     return (
-      <div className="CitySearch">
+      <div className="city-search">
       <input type="text" className="city" value={this.state.query} onChange={this.handleInputChanged} onFocus={() => { this.setState({ showSuggestions: true })}} placeholder='Search for a city' />
-      <ul className="suggestions" style={this.state.showSuggestions ? {} : { display: 'none'}}>
+      <ul className="suggestions" style={this.state.showSuggestions ? {} : { display: 'none' }}>
         {this.state.suggestions.map(suggestion => (
           <li key={suggestion} onClick={() => this.handleItemClicked(suggestion)} >{suggestion}</li>
         ))}

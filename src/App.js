@@ -12,18 +12,31 @@ import NumberOfEvents from './NumberOfEvents';
 class App extends React.Component {
   state = {
     events: [],
-    locations: []
+    locations: [],
+    numberOfEvents: 32,
+    selectedLocation: 'all'
   }
 
-  updateEvents = (location) => {
+  updateEvents = (location, eventCount) => {
     getEvents().then(events => {
       const locationEvents = (location === 'all') ?
       events :
       events.filter(event => event.location === location);
+
+      const inputNumberOfEvents = locationEvents.slice(0, eventCount)
       this.setState({
-        events: locationEvents
+        events: inputNumberOfEvents,
+        selectedLocation: location
       })
     })
+  }
+
+  updateNumberOfEvents = async event => {
+    const value = event.target.value;
+      await this.setState({
+        numberOfEvents: value
+      })
+    this.updateEvents(this.state.selectedLocation, this.state.numberOfEvents)
   }
 
   componentDidMount() {
@@ -42,8 +55,9 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
+        <h1 className='logo'>Meet App</h1>
         <CitySearch locations={this.state.locations} updateEvents={this.updateEvents} />
-        <NumberOfEvents />
+        <NumberOfEvents numberOfEvents={this.state.numberOfEvents} updateNumberOfEvents={this.updateNumberOfEvents} />
         <EventList events={this.state.events} />
       </div>
     );
