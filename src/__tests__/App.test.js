@@ -9,10 +9,12 @@ import EventList from '../EventList';
 import CitySearch from '../CitySearch';
 import NumberOfEvents from '../NumberOfEvents';
 
+
+// Tests
+
 /*===
-Tests
+Unit test
 ===*/
-// Unit test
 describe('<App /> component', () => {
   let AppWrapper;
   beforeAll(() => {
@@ -32,13 +34,11 @@ describe('<App /> component', () => {
   });
 });
 
-// Integration test
-describe('<App /> integration', () => {
-  // let AppWrapper;
-  // beforeAll(() => {
-  //   AppWrapper = mount(<App />);
-  // });
-
+/*===
+Integration test
+===*/
+describe('<App /> and <CitySearch /> integration', () => {
+// CitySearch
   test('App passes "events" state as a prop to EventList', () => {
     const AppWrapper = mount(<App />);
     const AppEventsState = AppWrapper.state('events');
@@ -78,4 +78,18 @@ describe('<App /> integration', () => {
     expect(AppWrapper.state('events')).toEqual(allEvents)
     AppWrapper.unmount();
   })
+
+// NumberOfEvents
+  test('App passes "numberOfEvents" state as a prop to NumberOfEvents', () => {
+    const AppWrapper = mount(<App />);
+    const AppEventsState = AppWrapper.state('numberOfEvents');
+    expect(AppEventsState).not.toEqual(undefined);
+    expect(AppWrapper.find(NumberOfEvents).props().numberOfEvents).toEqual(AppEventsState);
+    AppWrapper.unmount();
+  });
 });
+
+
+describe('<App /> and <NumberOfEvents /> integration', () => {
+ 
+})
