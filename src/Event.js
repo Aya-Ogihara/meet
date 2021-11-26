@@ -18,7 +18,7 @@ export class Event extends Component {
       <div className='event'>
         <h2 className='event-summary'>{event.summary}</h2>
         <p className='event-location'>Location: {event.location}</p>
-        <p className='event-date'>Date: {event.start.dateTime} ({event.start.timeZone} Time)</p>
+        <p className='event-date event-time-zone'>Date: {event.start.dateTime} ({event.start.timeZone} Time)</p>
         <button className='toggle-btn' onClick={() => this.handleClick()} >{collapsed? 'More details' : 'Hide details'}</button>
         {collapsed ? (
         <div className='event-detail--hide'></div>

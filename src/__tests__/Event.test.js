@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import Event from '../Event';
-import { mockData } from '../mock-data'
+import { mockData } from '../mock-data';
 
 describe('<Event /> component', () => {
   let EventWrapper;
@@ -31,7 +31,7 @@ describe('<Event /> component', () => {
 
   test('User can expand an event to see its details by clicking button', () => {
     EventWrapper.setState({
-      collapsed: true
+      collapsed: true,
     });
     EventWrapper.find('.toggle-btn').simulate('click');
     expect(EventWrapper.state('collapsed')).toBe(false);
@@ -39,24 +39,23 @@ describe('<Event /> component', () => {
 
   test('Event description is displayed', () => {
     EventWrapper.setState({
-      collapsed: false
+      collapsed: false,
     });
     expect(EventWrapper.find('.event-description')).toHaveLength(1);
   });
 
   test('Event organizer is displayed', () => {
     EventWrapper.setState({
-      collapsed: false
+      collapsed: false,
     });
     expect(EventWrapper.find('.event-organizer')).toHaveLength(1);
   });
 
   test('User can collapse an event to hide its details by clicking button', () => {
     EventWrapper.setState({
-      collapsed: false
+      collapsed: false,
     });
     EventWrapper.find('.toggle-btn').simulate('click');
     expect(EventWrapper.state('collapsed')).toBe(true);
   });
-
-})
+});
