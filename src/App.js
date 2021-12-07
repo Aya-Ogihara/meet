@@ -40,11 +40,11 @@ class App extends React.Component {
         errorInfo: 'Please enter 1 - 32',
       });
     } else {
-    await this.setState({
-      numberOfEvents: value,
-      errorInfo: ''
-    });
-    this.updateEvents(this.state.selectedLocation, this.state.numberOfEvents);
+      await this.setState({
+        numberOfEvents: value,
+        errorInfo: '',
+      });
+      this.updateEvents(this.state.selectedLocation, this.state.numberOfEvents);
     }
   };
 

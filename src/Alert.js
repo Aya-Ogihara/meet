@@ -1,25 +1,25 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
 class Alert extends Component {
   constructor(props) {
     super(props);
     this.color = null;
-    this.fontSize = '14px'
+    this.fontSize = '14px';
   }
-  
+
   getStyle = () => {
     return {
       color: this.color,
-      fontSize: this.fontSize
+      fontSize: this.fontSize,
     };
-  }
+  };
 
   render() {
     return (
       <div className='Alert'>
         <p style={this.getStyle()}>{this.props.text}</p>
       </div>
-    )
+    );
   }
 }
 
@@ -42,13 +42,13 @@ class WarningAlert extends Alert {
     super(props);
     this.color = 'orange';
   }
-  
+
   getStyle = () => {
     return {
       color: this.color,
-      fontSize: '20px'
+      fontSize: '20px',
     };
-  }
+  };
 }
 
 export { InfoAlert, ErrorAlert, WarningAlert };
