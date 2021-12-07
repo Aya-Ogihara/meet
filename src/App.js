@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import './nprogress.css';
 import { extractLocations, getEvents } from './api';
+import { ErrorAlert } from './Alert';
 
 // Component
 import EventList from './EventList';
@@ -14,6 +15,7 @@ class App extends React.Component {
     locations: [],
     numberOfEvents: 32,
     selectedLocation: 'all',
+    errorInfo: '',
   };
 
   updateEvents = (location, eventCount) => {
@@ -33,10 +35,17 @@ class App extends React.Component {
 
   updateNumberOfEvents = async (event) => {
     const value = event.target.value;
+    if (value < 0 || value >= 32) {
+      await this.setState({
+        errorInfo: 'Please enter 1 - 32',
+      });
+    } else {
     await this.setState({
       numberOfEvents: value,
+      errorInfo: ''
     });
     this.updateEvents(this.state.selectedLocation, this.state.numberOfEvents);
+    }
   };
 
   componentDidMount() {
@@ -60,6 +69,7 @@ class App extends React.Component {
           locations={this.state.locations}
           updateEvents={this.updateEvents}
         />
+        <ErrorAlert text={this.state.errorInfo} />
         <NumberOfEvents
           numberOfEvents={this.state.numberOfEvents}
           updateNumberOfEvents={this.updateNumberOfEvents}
