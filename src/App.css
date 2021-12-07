@@ -66,11 +66,13 @@ input[type="number"] {
   display: flex;
   flex-direction: column;
   flex-basis: 300px;
-  max-width: 300px;
+  max-width: 700px;
   margin:20px auto;
   position: relative;
 }
-
+.Alert {
+  height: 20px;
+}
 .city {
   width: 250px;
 }
@@ -81,7 +83,7 @@ input[type="number"] {
   z-index: 2;
   align-self: center;
   margin: 0;
-  top: 43px;
+  top: 60px;
   font-size: 14px;
   box-shadow: 10px 10px 16px -12px rgba(0, 0, 0, 0.5);
 }
