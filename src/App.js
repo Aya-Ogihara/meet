@@ -59,7 +59,7 @@ class App extends React.Component {
     const code = searchParams.get('code');
 
     this.setState({ showWelcomeScreen: !(code || isTokenValid) });
-    // if ((code || isTokenValid) && this.mounted) {
+    if ((code || isTokenValid) && this.mounted) {
       getEvents().then((events) => {
         if (this.mounted) {
           this.setState({ events, locations: extractLocations(events) });
@@ -74,7 +74,7 @@ class App extends React.Component {
           warningInfo: '',
         });
       }
-    // }
+    }
   }
 
   componentWillUnmount() {
@@ -82,8 +82,9 @@ class App extends React.Component {
   }
 
   render() {
-    // if (this.state.showWelcomeScreen === undefined)
-    //   return <div className='App' />;
+    if (this.state.showWelcomeScreen === undefined) {
+      return <div className='App' />;
+    }
     return (
       <div className='App'>
         <h1 className='logo'>Meet App</h1>
