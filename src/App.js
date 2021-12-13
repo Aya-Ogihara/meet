@@ -55,17 +55,18 @@ class App extends React.Component {
       if (this.mounted) {
         this.setState({ events, locations: extractLocations(events) });
       }
+
+      if (!navigator.onLine) {
+        this.setState({
+          warningInfo: 'Warning: Your internet connection is offline',
+        });
+      } else {
+        this.setState({
+          errorInfo: '',
+        });
+        this.updateEvents(this.state.selectedLocation, this.state.numberOfEvents);
+      }
     });
-    if (!navigator.onLine) {
-      this.setState({
-        warningInfo: 'Warning: Your internet connection is offline',
-      });
-    } else {
-      this.setState({
-        errorInfo: '',
-      });
-      this.updateEvents(this.state.selectedLocation, this.state.numberOfEvents);
-    }
   }
 
   componentWillUnmount() {
