@@ -71,9 +71,8 @@ class App extends React.Component {
           });
         } else {
           this.setState({
-            errorInfo: '',
+            warningInfo: '',
           });
-          this.updateEvents(this.state.selectedLocation, this.state.numberOfEvents);
         }
       });
     }
