@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import './nprogress.css';
 import { extractLocations, getEvents } from './api';
-import { ErrorAlert } from './Alert';
+import { ErrorAlert, WarningAlert } from './Alert';
 
 // Component
 import EventList from './EventList';
@@ -16,6 +16,7 @@ class App extends React.Component {
     numberOfEvents: 32,
     selectedLocation: 'all',
     errorInfo: '',
+    warningInfo: 'Your internet connection is good',
   };
 
   updateEvents = (location, eventCount) => {
@@ -55,6 +56,16 @@ class App extends React.Component {
         this.setState({ events, locations: extractLocations(events) });
       }
     });
+    if (!navigator.onLine) {
+      this.setState({
+        warningInfo: 'Warning: Your internet connection is offline',
+      });
+    } else {
+      this.setState({
+        errorInfo: '',
+      });
+      this.updateEvents(this.state.selectedLocation, this.state.numberOfEvents);
+    }
   }
 
   componentWillUnmount() {
@@ -74,6 +85,7 @@ class App extends React.Component {
           numberOfEvents={this.state.numberOfEvents}
           updateNumberOfEvents={this.updateNumberOfEvents}
         />
+        <WarningAlert text={this.state.warningInfo} />
         <EventList events={this.state.events} />
       </div>
     );
