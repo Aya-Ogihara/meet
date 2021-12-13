@@ -9,28 +9,33 @@
 import axios from 'axios';
 import { mockData } from './mock-data';
 import NProgress from 'nprogress';
+import { nativeTouchData } from 'react-dom/cjs/react-dom-test-utils.production.min';
 
 export const extractLocations = (events) => {
-  const extractLocations = events.map(event => event.location);
+  const extractLocations = events.map((event) => event.location);
   const locations = [...new Set(extractLocations)];
-  return locations
+  return locations;
 };
 
 export const checkToken = async (accessToken) => {
   const result = await fetch(
     `https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${accessToken}`
   )
-    .then(res => res.json())
-    .catch(err => err.json())
-  
-  return result
+    .then((res) => res.json())
+    .catch((err) => err.json());
+
+  return result;
 };
 
 const removeQuery = () => {
-  let newurl
+  let newurl;
 
   if (window.history.pushState && window.location.pathname) {
-    newurl = window.location.protocol + '//' + window.location.host + window.location.pathname;
+    newurl =
+      window.location.protocol +
+      '//' +
+      window.location.host +
+      window.location.pathname;
     window.history.pushState('', '', newurl);
   } else {
     newurl = window.location.protocol + '//' + window.location.host;
@@ -43,29 +48,29 @@ const getToken = async (code) => {
   const { access_token } = await fetch(
     `https://04nsfbykbc.execute-api.ap-southeast-2.amazonaws.com/dev/api/token/${encodeCode}`
   )
-    .then(res => {
+    .then((res) => {
       return res.json();
     })
-    .catch(err => {
-      return err
-    })
+    .catch((err) => {
+      return err;
+    });
   access_token && localStorage.setItem('access_token', access_token);
-  return access_token
+  return access_token;
 };
 
 export const getEvents = async () => {
-  NProgress.start()
+  NProgress.start();
 
   if (window.location.href.startsWith('http://localhost')) {
-    NProgress.done()
+    NProgress.done();
     return mockData;
   }
 
   if (!navigator.onLine) {
-    const events = localStorage.getItem('lastEvents');
+    const data = localStorage.getItem('lastEvents');
     NProgress.done();
-    //console.log(events)
-    return events ? JSON.parse(events).events : [];
+    console.log(nativeTouchData);
+    return data ? JSON.parse(data).events : [];
   }
 
   const token = await getAccessToken();
@@ -77,7 +82,7 @@ export const getEvents = async () => {
     if (result.data) {
       const locations = extractLocations(result.data.events);
       localStorage.setItem('lastEvents', JSON.stringify(result.data));
-      localStorage.setItem('locations', JSON.stringify(locations))
+      localStorage.setItem('locations', JSON.stringify(locations));
     }
     NProgress.done();
     return result.data.events;

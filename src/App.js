@@ -18,7 +18,7 @@ class App extends React.Component {
     selectedLocation: 'all',
     errorInfo: '',
     warningInfo: 'Your internet connection is good',
-    showWelcomeScreen: undefined
+    showWelcomeScreen: undefined,
   };
 
   updateEvents = (location, eventCount) => {
@@ -58,20 +58,20 @@ class App extends React.Component {
     const searchParams = new URLSearchParams(window.location.search);
     const code = searchParams.get('code');
 
-    this.setState({ showWelcomeScreen: !(code || isTokenValid)})
-    if((code || isTokenValid) && this.mounted) {
+    this.setState({ showWelcomeScreen: !(code || isTokenValid) });
+    if ((code || isTokenValid) && this.mounted) {
       getEvents().then((events) => {
         if (this.mounted) {
           this.setState({ events, locations: extractLocations(events) });
         }
-  
+
         if (!navigator.onLine) {
           this.setState({
             warningInfo: 'Warning: Your internet connection is offline',
           });
         } else {
           this.setState({
-            warningInfo: '',
+            warningInfo: 'Your internet connection is still good',
           });
         }
       });
@@ -83,7 +83,8 @@ class App extends React.Component {
   }
 
   render() {
-    if (this.state.showWelcomeScreen === undefined) return <div className='App' />
+    if (this.state.showWelcomeScreen === undefined)
+      return <div className='App' />;
     return (
       <div className='App'>
         <h1 className='logo'>Meet App</h1>
@@ -98,7 +99,12 @@ class App extends React.Component {
         />
         <WarningAlert text={this.state.warningInfo} />
         <EventList events={this.state.events} />
-        <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen} getAccessToken={() => { getAccessToken() }} />
+        <WelcomeScreen
+          showWelcomeScreen={this.state.showWelcomeScreen}
+          getAccessToken={() => {
+            getAccessToken();
+          }}
+        />
       </div>
     );
   }
