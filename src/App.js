@@ -17,7 +17,7 @@ class App extends React.Component {
     numberOfEvents: 32,
     selectedLocation: 'all',
     errorInfo: '',
-    warningInfo: '',
+    warningInfo: 'Your internet connection is good',
     showWelcomeScreen: undefined
   };
 
