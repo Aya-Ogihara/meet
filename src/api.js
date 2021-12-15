@@ -69,8 +69,8 @@ export const getEvents = async () => {
   if (!navigator.onLine) {
     const data = localStorage.getItem('lastEvents');
     NProgress.done();
-    console.log(nativeTouchData)
-    console.log(data);
+    //console.log(nativeTouchData)
+    //console.log(data);
     return data ? JSON.parse(data).events : [];
   }
 
