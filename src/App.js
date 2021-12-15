@@ -17,7 +17,7 @@ class App extends React.Component {
     numberOfEvents: 32,
     selectedLocation: 'all',
     errorInfo: '',
-    // warningInfo: '',
+    warningInfo: '',
     showWelcomeScreen: undefined,
   };
 
@@ -34,16 +34,17 @@ class App extends React.Component {
         if (this.mounted) {
           this.setState({ events, locations: extractLocations(events) });
         }
+        if (!navigator.onLine) {
+          this.setState({
+            warningInfo: 'Warning: Your internet connection is offline',
+          });
+        } else {
+          this.setState({
+            warningInfo: '',
+          });
+        }
       });
-      // if (!navigator.onLine) {
-      //   this.setState({
-      //     warningInfo: 'Warning: Your internet connection is offline',
-      //   });
-      // } else {
-      //   this.setState({
-      //     warningInfo: '',
-      //   });
-      // }
+      
     }
   }
 
@@ -97,12 +98,12 @@ class App extends React.Component {
           numberOfEvents={this.state.numberOfEvents}
           updateNumberOfEvents={this.updateNumberOfEvents}
         />
-        {/* <WarningAlert text={this.state.warningInfo} /> */}
-        {navigator.onLine ? (
+        <WarningAlert text={this.state.warningInfo} />
+        {/* {navigator.onLine ? (
           <WarningAlert text=' ' />
         ) : (
           <WarningAlert text='Warning: Your internet connection is offline' />
-        )}
+        )} */}
         <EventList events={this.state.events} />
         <WelcomeScreen
           showWelcomeScreen={this.state.showWelcomeScreen}
