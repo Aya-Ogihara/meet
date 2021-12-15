@@ -17,7 +17,7 @@
 //     numberOfEvents: 32,
 //     selectedLocation: 'all',
 //     errorInfo: '',
-//     warningInfo: '',
+//     // warningInfo: '',
 //     showWelcomeScreen: undefined,
 //   };
 
@@ -35,15 +35,15 @@
 //           this.setState({ events, locations: extractLocations(events) });
 //         }
 //       });
-//       if (!navigator.onLine) {
-//         this.setState({
-//           warningInfo: 'Warning: Your internet connection is offline',
-//         });
-//       } else {
-//         this.setState({
-//           warningInfo: '',
-//         });
-//       }
+//       // if (!navigator.onLine) {
+//       //   this.setState({
+//       //     warningInfo: 'Warning: Your internet connection is offline',
+//       //   });
+//       // } else {
+//       //   this.setState({
+//       //     warningInfo: '',
+//       //   });
+//       // }
 //     } 
 //   }
 
@@ -98,7 +98,8 @@
 //           numberOfEvents={this.state.numberOfEvents}
 //           updateNumberOfEvents={this.updateNumberOfEvents}
 //         />
-//         <WarningAlert text={this.state.warningInfo} />
+//         {/* <WarningAlert text={this.state.warningInfo} /> */}
+//         { !navigator.onLine ? (<WarningAlert text='Warning: Your connection is offline' />) : (<WarningAlert text=' ' />)}
 //         <EventList events={this.state.events} />
 //         <WelcomeScreen
 //           showWelcomeScreen={this.state.showWelcomeScreen}
@@ -131,7 +132,7 @@ class App extends React.Component {
     numberOfEvents: 32,
     selectedLocation: 'all',
     errorInfo: '',
-    warningInfo: '',
+    //warningInfo: '',
   };
 
   updateEvents = (location, eventCount) => {
@@ -171,15 +172,15 @@ class App extends React.Component {
         this.setState({ events, locations: extractLocations(events) });
       }
 
-      if (!navigator.onLine) {
-        this.setState({
-          warningInfo: 'Warning: Your internet connection is offline',
-        });
-      } else {
-        this.setState({
-          warningInfo: '',
-        });
-      }
+      // if (!navigator.onLine) {
+      //   this.setState({
+      //     warningInfo: 'Warning: Your internet connection is offline',
+      //   });
+      // } else {
+      //   this.setState({
+      //     warningInfo: '',
+      //   });
+      // }
     });
   }
 
@@ -200,7 +201,7 @@ class App extends React.Component {
           numberOfEvents={this.state.numberOfEvents}
           updateNumberOfEvents={this.updateNumberOfEvents}
         />
-        <WarningAlert text={this.state.warningInfo} />
+        { !navigator.onLine ? (<WarningAlert text='Warning: Your connection is offline' />) : (<WarningAlert text=' ' />)}
         <EventList events={this.state.events} />
       </div>
     );
