@@ -35,15 +35,15 @@ class App extends React.Component {
           this.setState({ events, locations: extractLocations(events) });
         }
       });
-      if (!navigator.onLine) {
-        this.setState({
-          warningInfo: 'Warning: Your internet connection is offline',
-        });
-      } else {
-        this.setState({
-          warningInfo: '',
-        });
-      }
+      // if (!navigator.onLine) {
+      //   this.setState({
+      //     warningInfo: 'Warning: Your internet connection is offline',
+      //   });
+      // } else {
+      //   this.setState({
+      //     warningInfo: '',
+      //   });
+      // }
     } 
   }
 
@@ -83,9 +83,9 @@ class App extends React.Component {
 
 
   render() {
-    if (this.state.showWelcomeScreen === undefined) {
-      return <div className='App' />;
-    }
+    // if (this.state.showWelcomeScreen === undefined) {
+    //   return <div className='App' />;
+    // }
     return (
       <div className='App'>
         <h1 className='logo'>Meet App</h1>
