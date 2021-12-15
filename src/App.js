@@ -82,9 +82,9 @@ class App extends React.Component {
   };
 
   render() {
-    // if (this.state.showWelcomeScreen === undefined) {
-    //   return <div className='App' />;
-    // }
+    if (this.state.showWelcomeScreen === undefined) {
+      return <div className='App' />;
+    }
     return (
       <div className='App'>
         <h1 className='logo'>Meet App</h1>
@@ -101,7 +101,7 @@ class App extends React.Component {
         {navigator.onLine ? (
           <WarningAlert text=' ' />
         ) : (
-          <WarningAlert text='Warning: Your connection is offline' />
+          <WarningAlert text='Warning: Your internet connection is offline' />
         )}
         <EventList events={this.state.events} />
         <WelcomeScreen
