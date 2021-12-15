@@ -201,7 +201,7 @@ class App extends React.Component {
           numberOfEvents={this.state.numberOfEvents}
           updateNumberOfEvents={this.updateNumberOfEvents}
         />
-        { !navigator.onLine ? (<WarningAlert text='Warning: Your connection is offline' />) : (<WarningAlert text=' ' />)}
+        { navigator.onLine ? (<WarningAlert text=' ' />) : (<WarningAlert text='Warning: Your connection is offline' />)}
         <EventList events={this.state.events} />
       </div>
     );
