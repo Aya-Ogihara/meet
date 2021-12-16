@@ -70,7 +70,7 @@ export const getEvents = async () => {
     const data = localStorage.getItem('lastEvents');
     NProgress.done();
     //console.log(nativeTouchData)
-    //console.log(data);
+    console.log(data);
     return data ? JSON.parse(data).events : [];
   }
 
