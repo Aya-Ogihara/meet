@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { format } from 'date-fns';
 
 export class Event extends Component {
   state = {
@@ -19,7 +20,7 @@ export class Event extends Component {
         <h2 className='event-summary'>{event.summary}</h2>
         <p className='event-location'>Location: {event.location}</p>
         <p className='event-date event-time-zone'>
-          Date: {event.start.dateTime} ({event.start.timeZone} Time)
+          Date: {format(event.start.dateTime, 'yyyy-MMM-dd')} ({event.start.timeZone} Time)
         </p>
         <button className='toggle-btn' onClick={() => this.handleClick()}>
           {collapsed ? 'More details' : 'Hide details'}
