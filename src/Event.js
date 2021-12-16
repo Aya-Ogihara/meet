@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { format } from 'date-fns';
+import { format, subDays } from 'date-fns';
 
 export class Event extends Component {
   state = {
@@ -15,26 +15,36 @@ export class Event extends Component {
   render() {
     const { event } = this.props;
     const { collapsed } = this.state;
+    const date = format(new Date(event.start.dateTime), 'yyyy/MMM/dd');
+    const time = format(new Date(event.start.dateTime), 'h:mm aaa');
     return (
       <div className='event'>
-        <h2 className='event-summary'>{event.summary}</h2>
-        <p className='event-location'>Location: {event.location}</p>
-        <p className='event-date event-time-zone'>
-          Date: {format(event.start.dateTime, 'yyyy-MMM-dd')} ({event.start.timeZone} Time)
-        </p>
-        <button className='toggle-btn' onClick={() => this.handleClick()}>
-          {collapsed ? 'More details' : 'Hide details'}
-        </button>
-        {collapsed ? (
-          <div className='event-detail--hide'></div>
-        ) : (
-          <div className='event-detail--show'>
-            <h3 className='event-description-title'>Event description</h3>
-            <p className='event-description'>{event.description}</p>
-            <h4 className='event-organizer'>Organizer</h4>
-            <p>{event.organizer.email}</p>
+        <div className='event-title'>
+          <h2 className='event-summary'>{event.summary}</h2>
+        </div>
+        <div className='event-content'>
+          <div className='event-display'>
+            <div>
+              <p className='event-location'>📍 {event.location}</p>
+              <p className='event-date event-time-zone'>
+                {date} | {time}~ ({event.start.timeZone} Time)
+              </p>
+            </div>
+            <button className='toggle-btn' onClick={() => this.handleClick()}>
+              {collapsed ? 'More details' : 'Hide details'}
+            </button>
           </div>
-        )}
+          {collapsed ? (
+            <div className='event-detail--hide'></div>
+          ) : (
+            <div className='event-detail--show'>
+              <h3 className='event-description-title'>
+                What is the event about?
+              </h3>
+              <p className='event-description'>{event.description}</p>
+            </div>
+          )}
+        </div>
       </div>
     );
   }
