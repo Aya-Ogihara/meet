@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { format, subDays } from 'date-fns';
+import { format } from 'date-fns';
 
 export class Event extends Component {
   state = {
