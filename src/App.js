@@ -3,7 +3,15 @@ import './App.css';
 import './nprogress.css';
 import { extractLocations, getEvents, checkToken, getAccessToken } from './api';
 import { ErrorAlert, WarningAlert } from './Alert';
-import { ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import {
+  ScatterChart,
+  Scatter,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+} from 'recharts';
 
 // Component
 import EventList from './EventList';
@@ -114,14 +122,19 @@ class App extends React.Component {
         />
         <h4>Events in each city</h4>
         <ResponsiveContainer height={400}>
-        <ScatterChart margin={{ top: 20, right: 20, bottom: 10, left: 10 }}>
-          <CartesianGrid strokeDasharray='3 3' />
-          <XAxis type='category' dataKey='city' name='city' />
-          <YAxis allowDecimals={false} type='category' dataKey='number' name='number of events' />
-          <Tooltip cursor={{ strikeDasharray: '3 3'}} />
-          <Scatter data={this.getData()} fill='#8884d8' />
-        </ScatterChart>
-      </ResponsiveContainer>
+          <ScatterChart margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
+            <CartesianGrid />
+            <XAxis type='category' dataKey='city' name='city' />
+            <YAxis
+              allowDecimals={false}
+              type='category'
+              dataKey='number'
+              name='number of events'
+            />
+            <Tooltip cursor={{ strikeDasharray: '3 3' }} />
+            <Scatter data={this.getData()} fill='#8884d8' />
+          </ScatterChart>
+        </ResponsiveContainer>
         <WarningAlert text={this.state.warningInfo} />
         <EventList events={this.state.events} />
         <WelcomeScreen
