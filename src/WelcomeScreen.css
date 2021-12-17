@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Playball&display=swap');
+
 .WelcomeScreen {
   position: fixed;
   width: 100%;
@@ -8,6 +10,7 @@
 }
 
 .WelcomeScreen h1 {
+  font-family: 'Playball', cursive;
   font-size: 32px;
   margin-bottom: 20px;
 }

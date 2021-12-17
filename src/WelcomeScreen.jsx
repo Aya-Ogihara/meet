@@ -5,7 +5,7 @@ function WelcomeScreen(props) {
   return props.showWelcomeScreen ? (
     <div className='WelcomeScreen'>
       <div className='body-wrapper'>
-        <h1>Welcome to the Meet app</h1>
+        <h1>Meet App</h1>
         <h4>
           Log in to see upcoming events around the world for full-stack
           developers
