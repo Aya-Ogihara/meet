@@ -3,6 +3,7 @@ import './App.css';
 import './nprogress.css';
 import { extractLocations, getEvents, checkToken, getAccessToken } from './api';
 import { ErrorAlert, WarningAlert } from './Alert';
+import { ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 // Component
 import EventList from './EventList';
@@ -81,6 +82,20 @@ class App extends React.Component {
     }
   };
 
+  getData = () => {
+    const { locations, events } = this.state;
+    const data = locations.map((location) => {
+      const number = events.filter(
+        (event) => event.location === location
+      ).length;
+      const city = location.split(', ').shift();
+      console.log(`city: ${city}`);
+      console.log(`number: ${number}`);
+      return { city, number };
+    });
+    return data;
+  };
+
   render() {
     if (this.state.showWelcomeScreen === undefined) {
       return <div className='App' />;
@@ -97,6 +112,16 @@ class App extends React.Component {
           numberOfEvents={this.state.numberOfEvents}
           updateNumberOfEvents={this.updateNumberOfEvents}
         />
+        <h4>Events in each city</h4>
+        <ResponsiveContainer height={400}>
+        <ScatterChart margin={{ top: 20, right: 20, bottom: 10, left: 10 }}>
+          <CartesianGrid strokeDasharray='3 3' />
+          <XAxis type='category' dataKey='city' name='city' />
+          <YAxis allowDecimals={false} type='category' dataKey='number' name='number of events' />
+          <Tooltip cursor={{ strikeDasharray: '3 3'}} />
+          <Scatter data={this.getData()} fill='#8884d8' />
+        </ScatterChart>
+      </ResponsiveContainer>
         <WarningAlert text={this.state.warningInfo} />
         <EventList events={this.state.events} />
         <WelcomeScreen
@@ -120,6 +145,15 @@ export default App;
 // import './nprogress.css';
 // import { extractLocations, getEvents } from './api';
 // import { ErrorAlert, WarningAlert } from './Alert';
+// import {
+//   ScatterChart,
+//   Scatter,
+//   XAxis,
+//   YAxis,
+//   CartesianGrid,
+//   Tooltip,
+//   ResponsiveContainer,
+// } from 'recharts';
 
 // // Component
 // import EventList from './EventList';
@@ -166,6 +200,20 @@ export default App;
 //     }
 //   };
 
+//   getData = () => {
+//     const { locations, events } = this.state;
+//     const data = locations.map((location) => {
+//       const number = events.filter(
+//         (event) => event.location === location
+//       ).length;
+//       const city = location.split(', ').shift();
+//       console.log(`city: ${city}`);
+//       console.log(`number: ${number}`);
+//       return { city, number };
+//     });
+//     return data;
+//   };
+
 //   componentDidMount() {
 //     this.mounted = true;
 //     getEvents().then((events) => {
@@ -202,8 +250,22 @@ export default App;
 //           numberOfEvents={this.state.numberOfEvents}
 //           updateNumberOfEvents={this.updateNumberOfEvents}
 //         />
-// {/* <WarningAlert text={this.state.warningInfo} /> */}
-//         { navigator.onLine ? (<WarningAlert text=' ' />) : (<WarningAlert text='Warning: Your connection is offline' />)}
+//         <h4>Events in each city</h4>
+//         <ResponsiveContainer height={400}>
+//           <ScatterChart margin={{ top: 20, right: 20, bottom: 10, left: 10 }}>
+//             <CartesianGrid strokeDasharray='3 3' />
+//             <XAxis type='category' dataKey='city' name='city' />
+//             <YAxis allowDecimals={false} type='category' dataKey='number' name='number of events' />
+//             <Tooltip cursor={{ strikeDasharray: '3 3'}} />
+//             <Scatter data={this.getData()} fill='#8884d8' />
+//           </ScatterChart>
+//         </ResponsiveContainer>
+//         {/* <WarningAlert text={this.state.warningInfo} /> */}
+//         {navigator.onLine ? (
+//           <WarningAlert text=' ' />
+//         ) : (
+//           <WarningAlert text='Warning: Your connection is offline' />
+//         )}
 //         <EventList events={this.state.events} />
 //       </div>
 //     );
