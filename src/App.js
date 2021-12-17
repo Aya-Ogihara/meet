@@ -134,7 +134,6 @@ class App extends React.Component {
             <Tooltip cursor={{ strokeDasharray: '3 3' }} />
             <Scatter name='A school' data={this.getData()} fill='#8884d8' />
           </ScatterChart>
-          ;
         </ResponsiveContainer>
         <WarningAlert text={this.state.warningInfo} />
         <EventList events={this.state.events} />
@@ -263,7 +262,8 @@ export default App;
 //         <NumberOfEvents
 //           numberOfEvents={this.state.numberOfEvents}
 //           updateNumberOfEvents={this.updateNumberOfEvents}
-//         />
+//         />/ ========
+// //
 //         <h4>Events in each city</h4>
 //         <ResponsiveContainer height={400}>
 //           <ScatterChart margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
