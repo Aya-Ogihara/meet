@@ -126,14 +126,15 @@ class App extends React.Component {
             <CartesianGrid />
             <XAxis type='category' dataKey='city' name='city' />
             <YAxis
+              type='number'
               allowDecimals={false}
-              type='category'
               dataKey='number'
-              name='number of events'
+              name='number of event'
             />
-            <Tooltip cursor={{ strikeDasharray: '3 3' }} />
-            <Scatter data={this.getData()} fill='#8884d8' />
+            <Tooltip cursor={{ strokeDasharray: '3 3' }} />
+            <Scatter name='A school' data={this.getData()} fill='#8884d8' />
           </ScatterChart>
+          ;
         </ResponsiveContainer>
         <WarningAlert text={this.state.warningInfo} />
         <EventList events={this.state.events} />
@@ -265,12 +266,17 @@ export default App;
 //         />
 //         <h4>Events in each city</h4>
 //         <ResponsiveContainer height={400}>
-//           <ScatterChart margin={{ top: 20, right: 20, bottom: 10, left: 10 }}>
-//             <CartesianGrid strokeDasharray='3 3' />
+//           <ScatterChart margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
+//             <CartesianGrid />
 //             <XAxis type='category' dataKey='city' name='city' />
-//             <YAxis allowDecimals={false} type='category' dataKey='number' name='number of events' />
-//             <Tooltip cursor={{ strikeDasharray: '3 3'}} />
-//             <Scatter data={this.getData()} fill='#8884d8' />
+//             <YAxis
+//               type='number'
+//               allowDecimals={false}
+//               dataKey='number'
+//               name='number of event'
+//             />
+//             <Tooltip cursor={{ strokeDasharray: '3 3' }} />
+//             <Scatter name='A school' data={this.getData()} fill='#8884d8' />
 //           </ScatterChart>
 //         </ResponsiveContainer>
 //         {/* <WarningAlert text={this.state.warningInfo} /> */}
