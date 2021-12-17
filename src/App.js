@@ -111,6 +111,7 @@ class App extends React.Component {
     return (
       <div className='App'>
         <h1 className='logo'>Meet App</h1>
+        <WarningAlert text={this.state.warningInfo} />
         <CitySearch
           locations={this.state.locations}
           updateEvents={this.updateEvents}
@@ -120,9 +121,8 @@ class App extends React.Component {
           numberOfEvents={this.state.numberOfEvents}
           updateNumberOfEvents={this.updateNumberOfEvents}
         />
-        <h4>Events in each city</h4>
         <ResponsiveContainer height={400}>
-          <ScatterChart margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
+          <ScatterChart margin={{ top: 50, right: 20, bottom: 20, left: 20 }}>
             <CartesianGrid />
             <XAxis type='category' dataKey='city' name='city' />
             <YAxis
@@ -132,10 +132,10 @@ class App extends React.Component {
               name='number of event'
             />
             <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-            <Scatter name='A school' data={this.getData()} fill='#8884d8' />
+            <Scatter name='A school' data={this.getData()} fill='#d328ae' />
           </ScatterChart>
         </ResponsiveContainer>
-        <WarningAlert text={this.state.warningInfo} />
+        
         <EventList events={this.state.events} />
         <WelcomeScreen
           showWelcomeScreen={this.state.showWelcomeScreen}
