@@ -27,14 +27,14 @@ o.svg'
               rel='nofollow noopener'
               class='btn-text'
             >
-              <b>Sign in with google</b>
+              Sign in with google
             </button>
-            Page 1
           </div>
         </div>
         <a
           href='https://aya-ogihara.github.io/meet/privacy.html'
           rel='nofollow noopener'
+          className='privacy-policy'
         >
           Privacy policy
         </a>
