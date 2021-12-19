@@ -3,7 +3,7 @@ Global styling
 === */
 @import url(https://fonts.googleapis.com/css?family=Roboto:400);
 @import url(https://fonts.googleapis.com/css?family=Roboto:600);
-
+@import url('https://fonts.googleapis.com/css2?family=Playball&display=swap');
 * {
   max-width: 1200px;
   margin: 0 auto;
@@ -20,6 +20,14 @@ body {
 ul {
   padding: 0;
   list-style: none;
+}
+
+li {
+  margin: 0;
+}
+
+ul:last-child {
+  margin-bottom: 80px;
 }
 
 h1, h2, h3, h4, h5, h6, p {
@@ -39,8 +47,9 @@ button {
 App
 === */
 .logo {
-  font-weight: 600;
-  font-size: 32px;
+  font-family: 'Playball', cursive;
+  /* font-weight: 600; */
+  font-size: 64px;
 }
 
 .App {
@@ -71,9 +80,11 @@ input[type="number"] {
   margin:20px auto;
   position: relative;
 }
+
 .Alert {
   height: 20px;
 }
+
 .city {
   width: 250px;
 }
@@ -117,15 +128,15 @@ Event
 
 .event {
   width: 550px;
-  margin: 20px 0 0 20px;
+  margin: 20px;
   text-align: left;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
 
 .event-title {
-  background-color: #d328ae;
-  border: 1px solid #d328ae;
+  background-color: #D73DB6;
+  border: 1px solid #D73DB6;
   border-radius: 4px 4px 0 0;
   padding: 10px;
 }
@@ -137,7 +148,7 @@ Event
 }
 
 .event-content {
-  padding: 15px 20px;
+  padding: 25px 20px;
   background: #fff;
   margin: 0;
 }
@@ -164,11 +175,11 @@ Event
 
 .event-description-title {
   font-weight: 600;
-  margin: 10px 0 7px 0;
+  margin: 10px 0;
 }
 
 .event-description {
-  line-height: 1.3;
+  line-height: 1.4;
 }
 
 .toggle-btn {
@@ -190,132 +201,31 @@ Event
   color: #fff;
 }
 
-
-/* .name {
-  font-size: 18px;
-  font-weight: 600;
-}
-
-.group-name {
-  text-transform: uppercase;
-  font-size: 14px;
-}
-
-.going,
-.visibility {
-  font-style: italic;
-}
-
-.description {
-  overflow-x: hidden;
-}
-
-.numberOfEvents {
-  width: 200px;
-  margin: 20px auto;
-  text-align: center;
-}
-
-.button-wrapper {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 20px;
-  padding: 20px;
-  font-family: sans-serif;
-}
-
-.Alert {
-  position: fixed;
-  top: 20px;
-}
-
 .data-vis-wrapper {
   display: flex;
   align-items: center;
-  flex-direction: column;
-}
-.data-vis-wrapper .recharts-responsive-container {
-  min-width: 100%;
-  display: flex;
-}
-.recharts-surface {
-  overflow: visible;
 }
 
-.login-button {
-  color: #494949;
-  text-transform: uppercase;
-  text-decoration: none;
-  background: #ffffff;
-  padding: 20px;
-  border: 4px solid #494949;
-  display: inline-block;
-  transition: all 0.4s ease 0s;
-  min-width: 10rem;
-  margin: 1rem;
+.pie-chart {
+  width: 300px;
 }
 
-.google-btn {
-  width: 184px;
-  height: 42px;
-  margin: 1rem;
-  background-color: #4285f4;
-  border-radius: 2px;
-  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.25);
-}
-.google-btn:hover {
-  box-shadow: 0 0 6px #4285f4;
-}
-.google-btn:active {
-  background: #1669f2;
-}
-.google-icon-wrapper {
-  position: absolute;
-  margin-top: 1px;
-  margin-left: 1px;
-  width: 40px;
-  height: 40px;
-  border-radius: 2px;
-  background-color: #fff;
-}
-.google-icon {
-  position: absolute;
-  margin-top: 11px;
-  margin-left: -8px;
-  width: 18px;
-  height: 18px;
-}
-.btn-text {
-  float: right;
-  margin: 11px 11px 0 0;
-  color: #fff;
-  font-size: 14px;
-  letter-spacing: 0.2px;
-  font-family: "Roboto";
-}
- */
 
-
-/* @media only screen and (min-width: 992px) {
+@media only screen and (max-width: 1180px) {
   .data-vis-wrapper {
-    flex-direction: row;
+    flex-direction: column;
   }
-  .data-vis-wrapper .recharts-responsive-container {
-    flex-basis: 50%;
-    max-width: 50%;
-    min-width: auto;
-    margin: 0 auto;
-  }
-} */
-
-@media only screen and (max-width: 780px) {
-
 }
 
 @media only screen and (max-width: 600px) {
+  .city-search {
+    margin: 0 auto;
+    margin-bottom: 10px;
+  }
+
   .event {
     width: 300px;
-    margin: 10px auto;
+    margin: 20px auto;
   }
   .event-display {
     flex-direction: column;
