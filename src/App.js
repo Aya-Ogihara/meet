@@ -18,6 +18,7 @@ import EventList from './EventList';
 import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
 import WelcomeScreen from './WelcomeScreen';
+import EventGenre from './EventGenre';
 
 class App extends React.Component {
   state = {
@@ -121,21 +122,23 @@ class App extends React.Component {
           numberOfEvents={this.state.numberOfEvents}
           updateNumberOfEvents={this.updateNumberOfEvents}
         />
-        <ResponsiveContainer height={400}>
-          <ScatterChart margin={{ top: 50, right: 20, bottom: 20, left: 20 }}>
-            <CartesianGrid />
-            <XAxis type='category' dataKey='city' name='city' />
-            <YAxis
-              type='number'
-              allowDecimals={false}
-              dataKey='number'
-              name='number of event'
-            />
-            <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-            <Scatter name='A school' data={this.getData()} fill='#d328ae' />
-          </ScatterChart>
-        </ResponsiveContainer>
-        
+        <div className='data-vis-wrapper'>
+          <EventGenre events={this.state.events} />
+          <ResponsiveContainer height={400}>
+            <ScatterChart margin={{ top: 50, right: 20, bottom: 20, left: 20 }}>
+              <CartesianGrid />
+              <XAxis type='category' dataKey='city' name='city' />
+              <YAxis
+                type='number'
+                allowDecimals={false}
+                dataKey='number'
+                name='number of event'
+              />
+              <Tooltip cursor={{ strokeDasharray: '3 3' }} />
+              <Scatter name='A school' data={this.getData()} fill='#d328ae' />
+            </ScatterChart>
+          </ResponsiveContainer>
+        </div>
         <EventList events={this.state.events} />
         <WelcomeScreen
           showWelcomeScreen={this.state.showWelcomeScreen}
@@ -172,6 +175,7 @@ export default App;
 // import EventList from './EventList';
 // import CitySearch from './CitySearch';
 // import NumberOfEvents from './NumberOfEvents';
+// import EventGenre from './EventGenre';
 
 // class App extends React.Component {
 //   state = {
@@ -220,8 +224,6 @@ export default App;
 //         (event) => event.location === location
 //       ).length;
 //       const city = location.split(', ').shift();
-//       console.log(`city: ${city}`);
-//       console.log(`number: ${number}`);
 //       return { city, number };
 //     });
 //     return data;
@@ -262,23 +264,24 @@ export default App;
 //         <NumberOfEvents
 //           numberOfEvents={this.state.numberOfEvents}
 //           updateNumberOfEvents={this.updateNumberOfEvents}
-//         />/ ========
-// //
-//         <h4>Events in each city</h4>
-//         <ResponsiveContainer height={400}>
-//           <ScatterChart margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
-//             <CartesianGrid />
-//             <XAxis type='category' dataKey='city' name='city' />
-//             <YAxis
-//               type='number'
-//               allowDecimals={false}
-//               dataKey='number'
-//               name='number of event'
-//             />
-//             <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-//             <Scatter name='A school' data={this.getData()} fill='#8884d8' />
-//           </ScatterChart>
-//         </ResponsiveContainer>
+//         />
+//         <div className='data-vis-wrapper'>
+//           <EventGenre events={this.state.events} />
+//           <ResponsiveContainer height={400}>
+//             <ScatterChart margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
+//               <CartesianGrid />
+//               <XAxis type='category' dataKey='city' name='city' />
+//               <YAxis
+//                 type='number'
+//                 allowDecimals={false}
+//                 dataKey='number'
+//                 name='number of event'
+//               />
+//               <Tooltip cursor={{ strokeDasharray: '3 3' }} />
+//               <Scatter name='A school' data={this.getData()} fill='#8884d8' />
+//             </ScatterChart>
+//           </ResponsiveContainer>
+//         </div>
 //         {/* <WarningAlert text={this.state.warningInfo} /> */}
 //         {navigator.onLine ? (
 //           <WarningAlert text=' ' />
