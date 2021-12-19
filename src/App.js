@@ -135,7 +135,7 @@ class App extends React.Component {
                 name='number of event'
               />
               <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-              <Scatter name='A school' data={this.getData()} fill='#8884d8' />
+              <Scatter name='A school' data={this.getData()} fill='#d328ae' />
             </ScatterChart>
           </ResponsiveContainer>
         </div>
@@ -256,6 +256,12 @@ export default App;
 //     return (
 //       <div className='App'>
 //         <h1 className='logo'>Meet App</h1>
+//         {/* <WarningAlert text={this.state.warningInfo} /> */}
+//         {navigator.onLine ? (
+//           <WarningAlert text=' ' />
+//         ) : (
+//           <WarningAlert text='Warning: Your connection is offline' />
+//         )}
 //         <CitySearch
 //           locations={this.state.locations}
 //           updateEvents={this.updateEvents}
@@ -268,7 +274,7 @@ export default App;
 //         <div className='data-vis-wrapper'>
 //           <EventGenre events={this.state.events} />
 //           <ResponsiveContainer height={400}>
-//             <ScatterChart margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
+//             <ScatterChart margin={{ top: 50, right:20, bottom: 0, left: 0 }}>
 //               <CartesianGrid />
 //               <XAxis type='category' dataKey='city' name='city' />
 //               <YAxis
@@ -278,16 +284,10 @@ export default App;
 //                 name='number of event'
 //               />
 //               <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-//               <Scatter name='A school' data={this.getData()} fill='#8884d8' />
+//               <Scatter name='A school' data={this.getData()} fill='#d328ae' />
 //             </ScatterChart>
 //           </ResponsiveContainer>
 //         </div>
-//         {/* <WarningAlert text={this.state.warningInfo} /> */}
-//         {navigator.onLine ? (
-//           <WarningAlert text=' ' />
-//         ) : (
-//           <WarningAlert text='Warning: Your connection is offline' />
-//         )}
 //         <EventList events={this.state.events} />
 //       </div>
 //     );

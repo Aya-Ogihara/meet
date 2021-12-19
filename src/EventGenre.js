@@ -1,15 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { PieChart, Pie, ResponsiveContainer } from 'recharts';
+import { PieChart, Pie, ResponsiveContainer, Cell, Legend } from 'recharts';
 
 const EventGenre = ({ events }) => {
-  // const data = [
-  //   { name: 'Group A', value: 400 },
-  //   { name: 'Group B', value: 300 },
-  //   { name: 'Group C', value: 300 },
-  //   { name: 'Group D', value: 200 },
-  // ];
 
   const [data, setData] = useState([]);
+  const colors = ['#d328ae', '#d73db6', '#db52be', '#e068c6', '#e47ece'];
+
   useEffect(() => {
     const getData = () => {
       const genres = ['React', 'JavaScript', 'Node', 'jQuery', 'AngularJS'];
@@ -28,20 +24,25 @@ const EventGenre = ({ events }) => {
   
 
   return (
-    <ResponsiveContainer height={400}>
-      <PieChart width={400} height={400}>
+    <ResponsiveContainer height={260} className='pie-chart'>
+      <PieChart margin={{ top: 30 }}>
         <Pie
           data={data}
           cx='50%'
           cy='50%'
           labelLine={false}
           outerRadius={80}
-          fill='#8884d8'
+          fill='#d328ae'
           dataKey='value'
-          label={({ name, percent }) =>
-            `${name} ${(percent * 100).toFixed(0)}%`
-          }
-        ></Pie>
+          // label={({ name, percent }) =>
+          //   `${name} ${(percent * 100).toFixed(0)}%`
+          // }
+        >
+          {data.map((entry, index) => (
+              <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />
+            ))}
+        </Pie>
+        <Legend layout="horizontal" verticalAlign="top" align="center" />
       </PieChart>
     </ResponsiveContainer>
   );
