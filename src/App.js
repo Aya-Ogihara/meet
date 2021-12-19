@@ -123,19 +123,19 @@ class App extends React.Component {
           updateNumberOfEvents={this.updateNumberOfEvents}
         />
         <div className='data-vis-wrapper'>
-          <EventGenre events={this.state.events} />
-          <ResponsiveContainer height={400}>
-            <ScatterChart margin={{ top: 50, right: 20, bottom: 20, left: 20 }}>
-              <CartesianGrid />
-              <XAxis type='category' dataKey='city' name='city' />
-              <YAxis
+            <EventGenre events={this.state.events} />
+            <ResponsiveContainer height={400}>
+              <ScatterChart margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
+                <CartesianGrid />
+                <XAxis type='category' dataKey='city' name='city' />
+                <YAxis
                 type='number'
                 allowDecimals={false}
                 dataKey='number'
                 name='number of event'
               />
               <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-              <Scatter name='A school' data={this.getData()} fill='#d328ae' />
+              <Scatter name='A school' data={this.getData()} fill='#8884d8' />
             </ScatterChart>
           </ResponsiveContainer>
         </div>
