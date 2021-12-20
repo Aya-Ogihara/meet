@@ -24,7 +24,7 @@ class App extends React.Component {
   state = {
     events: [],
     locations: [],
-    numberOfEvents: 32,
+    numberOfEvents: 16,
     selectedLocation: 'all',
     errorInfo: '',
     warningInfo: '',
