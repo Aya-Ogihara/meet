@@ -7,6 +7,20 @@ Live version: [https://aya-ogihara.github.io/meet/](https://aya-ogihara.github.i
 ![This is an image](https://i.ibb.co/brCVCd7/meet-top.jpg
 )
 
+## Installation
+To install the app and its dependencies run `npm install`
+
+To run tests `npm run test`
+
+To launch the app `npm start`
+
+
+## Test Runner
+* Unit Testing: Jest
+* Integration Testing: Jest
+* Acceptance Testing: Cucumber
+* End-to-end Testing: Puppeteer
+
 ## Key Features
 
 * Filter events by city.
