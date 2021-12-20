@@ -127,15 +127,15 @@ class App extends React.Component {
             <ResponsiveContainer height={400}>
               <ScatterChart margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
                 <CartesianGrid />
-                <XAxis type='category' dataKey='city' name='city' />
+                <XAxis type='category' dataKey='city' name='City' />
                 <YAxis
                 type='number'
                 allowDecimals={false}
                 dataKey='number'
-                name='number of event'
+                name='Number of event'
               />
               <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-              <Scatter name='A school' data={this.getData()} fill='#d328ae' />
+              <Scatter data={this.getData()} fill='#d328ae' />
             </ScatterChart>
           </ResponsiveContainer>
         </div>

@@ -4,7 +4,7 @@ export default class NumberOfEvents extends Component {
   render() {
     return (
       <div className='number-of-events'>
-        <label>Number of Events to Display: </label>
+        <h3>Number of Events to Display</h3>
         <input
           type='text'
           value={this.props.numberOfEvents}
