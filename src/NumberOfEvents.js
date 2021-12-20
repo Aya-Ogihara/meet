@@ -7,7 +7,6 @@ export default class NumberOfEvents extends Component {
         <h3>Number of Events to Display</h3>
         <input
           type='range'
-          value={16}
           min={1}
           max={31}
           value={this.props.numberOfEvents}
