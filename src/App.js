@@ -98,8 +98,8 @@ class App extends React.Component {
         (event) => event.location === location
       ).length;
       const city = location.split(', ').shift();
-      console.log(`city: ${city}`);
-      console.log(`number: ${number}`);
+      // console.log(`city: ${city}`);
+      // console.log(`number: ${number}`);
       return { city, number };
     });
     return data;
