@@ -1,165 +1,7 @@
-import React from 'react';
-import './App.css';
-import './nprogress.css';
-import { extractLocations, getEvents, checkToken, getAccessToken } from './api';
-import { ErrorAlert, WarningAlert } from './Alert';
-import {
-  ScatterChart,
-  Scatter,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-} from 'recharts';
-
-// Component
-import EventList from './EventList';
-import CitySearch from './CitySearch';
-import NumberOfEvents from './NumberOfEvents';
-import WelcomeScreen from './WelcomeScreen';
-import EventGenre from './EventGenre';
-
-class App extends React.Component {
-  state = {
-    events: [],
-    locations: [],
-    numberOfEvents: 32,
-    selectedLocation: 'all',
-    errorInfo: '',
-    warningInfo: '',
-    showWelcomeScreen: undefined,
-  };
-
-  async componentDidMount() {
-    this.mounted = true;
-    const accessToken = localStorage.getItem('access_token');
-    const isTokenValid = (await checkToken(accessToken)).error ? false : true;
-    const searchParams = new URLSearchParams(window.location.search);
-    const code = searchParams.get('code');
-
-    this.setState({ showWelcomeScreen: !(code || isTokenValid) });
-    if ((code || isTokenValid) && this.mounted) {
-      getEvents().then((events) => {
-        if (this.mounted) {
-          this.setState({ events, locations: extractLocations(events) });
-        }
-        if (!navigator.onLine) {
-          this.setState({
-            warningInfo: 'Your connection is offline',
-          });
-        } else {
-          this.setState({
-            warningInfo: '',
-          });
-        }
-      });
-    }
-  }
-
-  componentWillUnmount() {
-    this.mounted = false;
-  }
-
-  updateEvents = (location, eventCount) => {
-    getEvents().then((events) => {
-      const locationEvents =
-        location === 'all'
-          ? events
-          : events.filter((event) => event.location === location);
-
-      const inputNumberOfEvents = locationEvents.slice(0, eventCount);
-      this.setState({
-        events: inputNumberOfEvents,
-        selectedLocation: location,
-      });
-    });
-  };
-
-  updateNumberOfEvents = async (event) => {
-    const value = event.target.value;
-    if (value < 0 || value >= 32) {
-      await this.setState({
-        errorInfo: 'Please enter 1 - 32',
-      });
-    } else {
-      await this.setState({
-        numberOfEvents: value,
-        errorInfo: '',
-      });
-      this.updateEvents(this.state.selectedLocation, this.state.numberOfEvents);
-    }
-  };
-
-  getData = () => {
-    const { locations, events } = this.state;
-    const data = locations.map((location) => {
-      const number = events.filter(
-        (event) => event.location === location
-      ).length;
-      const city = location.split(', ').shift();
-      console.log(`city: ${city}`);
-      console.log(`number: ${number}`);
-      return { city, number };
-    });
-    return data;
-  };
-
-  render() {
-    if (this.state.showWelcomeScreen === undefined) {
-      return <div className='App' />;
-    }
-    return (
-      <div className='App'>
-        <h1 className='logo'>Meet App</h1>
-        <WarningAlert text={this.state.warningInfo} />
-        <CitySearch
-          locations={this.state.locations}
-          updateEvents={this.updateEvents}
-        />
-        <ErrorAlert text={this.state.errorInfo} />
-        <NumberOfEvents
-          numberOfEvents={this.state.numberOfEvents}
-          updateNumberOfEvents={this.updateNumberOfEvents}
-        />
-        <div className='data-vis-wrapper'>
-            <EventGenre events={this.state.events} />
-            <ResponsiveContainer height={400}>
-              <ScatterChart margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
-                <CartesianGrid />
-                <XAxis type='category' dataKey='city' name='City' />
-                <YAxis
-                type='number'
-                allowDecimals={false}
-                dataKey='number'
-                name='Number of event'
-              />
-              <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-              <Scatter data={this.getData()} fill='#d328ae' />
-            </ScatterChart>
-          </ResponsiveContainer>
-        </div>
-        <EventList events={this.state.events} />
-        <WelcomeScreen
-          showWelcomeScreen={this.state.showWelcomeScreen}
-          getAccessToken={() => {
-            getAccessToken();
-          }}
-        />
-      </div>
-    );
-  }
-}
-
-export default App;
-
-// // ========
-// // Local test
-// // ========
 // import React from 'react';
 // import './App.css';
 // import './nprogress.css';
-// import { extractLocations, getEvents } from './api';
+// import { extractLocations, getEvents, checkToken, getAccessToken } from './api';
 // import { ErrorAlert, WarningAlert } from './Alert';
 // import {
 //   ScatterChart,
@@ -175,6 +17,7 @@ export default App;
 // import EventList from './EventList';
 // import CitySearch from './CitySearch';
 // import NumberOfEvents from './NumberOfEvents';
+// import WelcomeScreen from './WelcomeScreen';
 // import EventGenre from './EventGenre';
 
 // class App extends React.Component {
@@ -184,8 +27,39 @@ export default App;
 //     numberOfEvents: 32,
 //     selectedLocation: 'all',
 //     errorInfo: '',
-//     //warningInfo: '',
+//     warningInfo: '',
+//     showWelcomeScreen: undefined,
 //   };
+
+//   async componentDidMount() {
+//     this.mounted = true;
+//     const accessToken = localStorage.getItem('access_token');
+//     const isTokenValid = (await checkToken(accessToken)).error ? false : true;
+//     const searchParams = new URLSearchParams(window.location.search);
+//     const code = searchParams.get('code');
+
+//     this.setState({ showWelcomeScreen: !(code || isTokenValid) });
+//     if ((code || isTokenValid) && this.mounted) {
+//       getEvents().then((events) => {
+//         if (this.mounted) {
+//           this.setState({ events, locations: extractLocations(events) });
+//         }
+//         if (!navigator.onLine) {
+//           this.setState({
+//             warningInfo: 'Your connection is offline',
+//           });
+//         } else {
+//           this.setState({
+//             warningInfo: '',
+//           });
+//         }
+//       });
+//     }
+//   }
+
+//   componentWillUnmount() {
+//     this.mounted = false;
+//   }
 
 //   updateEvents = (location, eventCount) => {
 //     getEvents().then((events) => {
@@ -224,44 +98,21 @@ export default App;
 //         (event) => event.location === location
 //       ).length;
 //       const city = location.split(', ').shift();
+//       console.log(`city: ${city}`);
+//       console.log(`number: ${number}`);
 //       return { city, number };
 //     });
 //     return data;
 //   };
 
-//   componentDidMount() {
-//     this.mounted = true;
-//     getEvents().then((events) => {
-//       if (this.mounted) {
-//         this.setState({ events, locations: extractLocations(events) });
-//       }
-
-//       // if (!navigator.onLine) {
-//       //   this.setState({
-//       //     warningInfo: 'Warning: Your internet connection is offline',
-//       //   });
-//       // } else {
-//       //   this.setState({
-//       //     warningInfo: '',
-//       //   });
-//       // }
-//     });
-//   }
-
-//   componentWillUnmount() {
-//     this.mounted = false;
-//   }
-
 //   render() {
+//     if (this.state.showWelcomeScreen === undefined) {
+//       return <div className='App' />;
+//     }
 //     return (
 //       <div className='App'>
 //         <h1 className='logo'>Meet App</h1>
-//         {/* <WarningAlert text={this.state.warningInfo} /> */}
-//         {navigator.onLine ? (
-//           <WarningAlert text=' ' />
-//         ) : (
-//           <WarningAlert text='Warning: Your connection is offline' />
-//         )}
+//         <WarningAlert text={this.state.warningInfo} />
 //         <CitySearch
 //           locations={this.state.locations}
 //           updateEvents={this.updateEvents}
@@ -272,26 +123,175 @@ export default App;
 //           updateNumberOfEvents={this.updateNumberOfEvents}
 //         />
 //         <div className='data-vis-wrapper'>
-//           <EventGenre events={this.state.events} />
-//           <ResponsiveContainer height={400}>
-//             <ScatterChart margin={{ top: 50, right:20, bottom: 0, left: 0 }}>
-//               <CartesianGrid />
-//               <XAxis type='category' dataKey='city' name='city' />
-//               <YAxis
+//             <EventGenre events={this.state.events} />
+//             <ResponsiveContainer height={400}>
+//               <ScatterChart margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
+//                 <CartesianGrid />
+//                 <XAxis type='category' dataKey='city' name='City' />
+//                 <YAxis
 //                 type='number'
 //                 allowDecimals={false}
 //                 dataKey='number'
-//                 name='number of event'
+//                 name='Number of event'
 //               />
 //               <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-//               <Scatter name='A school' data={this.getData()} fill='#d328ae' />
+//               <Scatter data={this.getData()} fill='#d328ae' />
 //             </ScatterChart>
 //           </ResponsiveContainer>
 //         </div>
 //         <EventList events={this.state.events} />
+//         <WelcomeScreen
+//           showWelcomeScreen={this.state.showWelcomeScreen}
+//           getAccessToken={() => {
+//             getAccessToken();
+//           }}
+//         />
 //       </div>
 //     );
 //   }
 // }
 
 // export default App;
+
+// ========
+// Local test
+// ========
+import React from 'react';
+import './App.css';
+import './nprogress.css';
+import { extractLocations, getEvents } from './api';
+import { ErrorAlert, WarningAlert } from './Alert';
+import {
+  ScatterChart,
+  Scatter,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+} from 'recharts';
+
+// Component
+import EventList from './EventList';
+import CitySearch from './CitySearch';
+import NumberOfEvents from './NumberOfEvents';
+import EventGenre from './EventGenre';
+
+class App extends React.Component {
+  state = {
+    events: [],
+    locations: [],
+    numberOfEvents: 16,
+    selectedLocation: 'all',
+    errorInfo: '',
+    //warningInfo: '',
+  };
+
+  updateEvents = (location, eventCount) => {
+    getEvents().then((events) => {
+      const locationEvents =
+        location === 'all'
+          ? events
+          : events.filter((event) => event.location === location);
+
+      const inputNumberOfEvents = locationEvents.slice(0, eventCount);
+      this.setState({
+        events: inputNumberOfEvents,
+        selectedLocation: location,
+      });
+    });
+  };
+
+  updateNumberOfEvents = async (event) => {
+    const value = event.target.value;
+    if (value < 0 || value >= 32) {
+      await this.setState({
+        errorInfo: 'Please enter 1 - 32',
+      });
+    } else {
+      await this.setState({
+        numberOfEvents: value,
+        errorInfo: '',
+      });
+      this.updateEvents(this.state.selectedLocation, this.state.numberOfEvents);
+    }
+  };
+
+  getData = () => {
+    const { locations, events } = this.state;
+    const data = locations.map((location) => {
+      const number = events.filter(
+        (event) => event.location === location
+      ).length;
+      const city = location.split(', ').shift();
+      return { city, number };
+    });
+    return data;
+  };
+
+  componentDidMount() {
+    this.mounted = true;
+    getEvents().then((events) => {
+      if (this.mounted) {
+        this.setState({ events, locations: extractLocations(events) });
+      }
+
+      // if (!navigator.onLine) {
+      //   this.setState({
+      //     warningInfo: 'Warning: Your internet connection is offline',
+      //   });
+      // } else {
+      //   this.setState({
+      //     warningInfo: '',
+      //   });
+      // }
+    });
+  }
+
+  componentWillUnmount() {
+    this.mounted = false;
+  }
+
+  render() {
+    return (
+      <div className='App'>
+        <h1 className='logo'>Meet App</h1>
+        {/* <WarningAlert text={this.state.warningInfo} /> */}
+        {navigator.onLine ? (
+          <WarningAlert text=' ' />
+        ) : (
+          <WarningAlert text='Warning: Your connection is offline' />
+        )}
+        <CitySearch
+          locations={this.state.locations}
+          updateEvents={this.updateEvents}
+        />
+        <ErrorAlert text={this.state.errorInfo} />
+        <NumberOfEvents
+          numberOfEvents={this.state.numberOfEvents}
+          updateNumberOfEvents={this.updateNumberOfEvents}
+        />
+        <div className='data-vis-wrapper'>
+          <EventGenre events={this.state.events} />
+          <ResponsiveContainer height={400}>
+            <ScatterChart margin={{ top: 50, right:20, bottom: 0, left: 0 }}>
+              <CartesianGrid />
+              <XAxis type='category' dataKey='city' name='city' />
+              <YAxis
+                type='number'
+                allowDecimals={false}
+                dataKey='number'
+                name='number of event'
+              />
+              <Tooltip cursor={{ strokeDasharray: '3 3' }} />
+              <Scatter name='A school' data={this.getData()} fill='#d328ae' />
+            </ScatterChart>
+          </ResponsiveContainer>
+        </div>
+        <EventList events={this.state.events} />
+      </div>
+    );
+  }
+}
+
+export default App;
