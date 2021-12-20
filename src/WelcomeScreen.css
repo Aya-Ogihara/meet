@@ -11,8 +11,8 @@
 
 .WelcomeScreen h1 {
   font-family: 'Playball', cursive;
-  font-size: 32px;
-  margin-bottom: 20px;
+  font-size: 64px;
+  margin-bottom: 40px;
 }
 
 /* .login-button {
@@ -84,6 +84,10 @@
 
 .btn-text:hover {
   cursor: pointer;
+}
+
+.button_cont {
+margin-bottom: 35px;
 }
 
 .privacy-policy {
