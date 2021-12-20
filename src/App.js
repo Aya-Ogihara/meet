@@ -46,7 +46,7 @@ class App extends React.Component {
         }
         if (!navigator.onLine) {
           this.setState({
-            warningInfo: 'Warning: Your connection is offline',
+            warningInfo: 'Your connection is offline',
           });
         } else {
           this.setState({
