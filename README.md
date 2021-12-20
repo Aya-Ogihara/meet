@@ -1,6 +1,11 @@
-# Meet App
+# Overview
 
-The application uses the Google Calendar API to fetch upcoming events.
+The application is a serverless, progressive web application (PWA) built with React and developed by using a Test-Driven Development (TDD) approach. The application uses the Google Calendar API to fetch upcoming events.
+
+Live version: [https://aya-ogihara.github.io/meet/](https://aya-ogihara.github.io/meet/) 
+
+![This is an image](https://i.ibb.co/brCVCd7/meet-top.jpg
+)
 
 ## Key Features
 
@@ -12,6 +17,7 @@ The application uses the Google Calendar API to fetch upcoming events.
 * View a chart showing the number of upcoming events by city.
 
 ## User Stories
+
 ### FEATURE 1: FILTER EVENTS BY CITY
 *“As a user, I should be able to ‘filter events by city’, So that I can see the list of events that take place in that city”*
 
